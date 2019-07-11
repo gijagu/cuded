@@ -1,9 +1,18 @@
 <?php
 session_start(); 
 $tipo = $_GET['t'];
-$user = $_POST['user'];
-$password = $_POST['pass']; 
+
 $url = 'http://aulavirtual.unfv.edu.pe/account/login';
+
+if(!empty($_SESSION['logged_in'])) {
+    $user = $_SESSION['user'];
+    $password = $_SESSION['pass']; 
+    $cursos = $_SESSION['cursos']; 
+
+    // echo "<pre>";
+    // echo print_r($_SESSION);
+    // echo "</pre>";
+}
 
 if($tipo == 'login'){
     
