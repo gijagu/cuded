@@ -551,26 +551,49 @@ $plataforma = false;
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
                 <script>
-                var cursos = [];
-                $(document).on("ready", function(){ 
+                    console.log(0);
 
-
+                $(document).ready(function(){ 
+                    console.log(1);
 
                     <?php  if(!empty($_SESSION['logged_in'])) { ?> 
 
-                            // for (let index = 0; index < array.length; index++) {
-                            //     const element = array[index];
-                                
-                            // }
-                        
-                            $.get( "http://localhost:8080/cuded/api.php?foros", { sectionId: <?php  print_r($_SESSION['cursos'][0]->sectionId); ?>   }, function( data ) {
+                        var cursos = [<?php                           
+                        for ($i=0; $i < count($_SESSION['cursos']); $i++) {                             
+                                echo '["'.$_SESSION['cursos'][$i]->sectionId.'",';
+                                echo '"'.$_SESSION['cursos'][$i]->name.'"] ,';                        
+                            }
+                        ?> ];
+
+                        console.log(cursos);
+
+                        for (let index = 0; index < cursos.length; index++) {
+                            // var id = cursos[index][0];
+
+                            // $.get( "http://localhost:8080/cuded/api.php?t=tareas", { sectionId:  id  }, function( data ) {
+                             
+                            //     // alert( "Load was performed." );
+                            // });
+
+                            $.ajax({
+                                method: "POST",
+                                url: "http://localhost:8080/cuded/api.php?t=tareas",
+                                data: {  sectionId:  cursos[index][0] },
+                                success: function(data){
+                                    console.log(cursos[index][0]);
                                 console.log(data);
-                                alert( "Load was performed." );
-                            });
+                                }
+                            })
+
+                            
+                        }
+                        
+          
                     
                     <?php } ?> 
 
