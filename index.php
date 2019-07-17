@@ -192,12 +192,7 @@ $plataforma = false;
             <?php 
 
 
-                if(!empty($_SESSION['logged_in'])) { 
-                    echo "<pre>";
-                    //print_r($_SESSION['cursos']);
-                    echo "</pre>";
-                    echo '<a href="/cuded/logout.php">logout</a>';                    
-                    ?>
+                if(!empty($_SESSION['logged_in'])) { ?>
 
                     
 
@@ -210,15 +205,17 @@ $plataforma = false;
                                     <div>  
                                         <div class="row">
                                             <div class="col col-12">
-                                                <div class="card mb-4 d-flex flex-row">                                   
-                                                        <a href="/app/ui/cards" class="d-flex router-link-exact-active active"><img src="<?php echo $objAlumno ->image;?>" alt="Card image cap" class="img-thumbnail list-thumbnail  rounded-circle align-self-center m-4 small"></a>
+                                                <div class="card mb-4 d-flex flex-row  align-items-center">                                   
+                                                        <a href="/app/ui/cards" class="d-flex router-link-exact-active active"><img src="<?php echo $_SESSION['alumno'] ->image;?>" alt="Card image cap" class="img-thumbnail list-thumbnail  rounded-circle align-self-center m-4 small"></a>
                                                         <div class=" d-flex flex-grow-1 min-width-zero">
                                                             <div class=" pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
-                                                                <div class="min-width-zero"><a href="/app/ui/cards" class="router-link-exact-active active"><h6 class="mb-1 card-subtitle truncate"><?php echo $objAlumno ->name;?></h6></a>
+                                                                <div class="min-width-zero"><a href="/app/ui/cards" class="router-link-exact-active active"><h6 class="mb-1 card-subtitle truncate"><?php echo $_SESSION['alumno'] ->name;?></h6></a>
                                                                     <p class="text-muted text-small mb-2"><?php echo date('l jS \of F Y h:i:s A'); ?></p>
                                                                 </div>
                                                             </div>
-                                                        </div>                                            
+                                                        </div> 
+
+                                                        <div class="position-relative d-lg-inline-block"><a target="_top" href="/cuded/logout.php" class="btn btn-outline-primary btn-sm ml-2">Salir</a></div>                                           
                                                     </div>
                                                 </div>
                                             </div>
@@ -237,106 +234,50 @@ $plataforma = false;
                                             </ul>
                                             <div class="tab-content" id="myTabContent">
 
-                                                <?php /** 
-                                                    <div class="tab-pane fade show active" id="tareas" role="tabpanel" aria-labelledby="tareas-tab">                                   
-                                                        <?php                                         
+                                                
+                                                    <div class="tab-pane fade show active" id="tareas" role="tabpanel" aria-labelledby="tareas-tab">                                   <ul class="list-unstyled my-4">
+                                                                <div role="radiogroup" tabindex="-1" class="pt-2 d-flex justify-content-around" id="items_tareas">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Flexbox" id="tareas_todos" name="tareas_todos">
+                                                                        <label class="custom-control-label" for="tareas_todos"><span>Todos</span></label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Sass" id="tareas_pendientes" name="tareas_pendientes">
+                                                                        <label class="custom-control-label" for="tareas_pendientes"><span>Pendientes</span></label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Vue" id="tareas_vencidos" name="tareas_vencidos">
+                                                                        <label class="custom-control-label" for="tareas_vencidos"><span>Vencidos</span></label>
+                                                                    </div>                                                     
+                                                                </div>
+                                                            </ul>
+                                                        <?php    
 
 
-                                                            for ($i = 0; $i < count($objCursos); $i++) {
-
-                                                                $sectionId = $objCursos[$i]->sectionId;
-                                                                $nombreCurso = $objCursos[$i]->name;
-                                                                curl_setopt($ch, CURLOPT_URL, 'http://aulavirtual.unfv.edu.pe/web/homework/listHomeworks?s='.$sectionId);
-                                                                curl_setopt($ch, CURLOPT_HTTPHEADER, $cabecera);
-                                                                curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
-                                                                curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookie.txt');
-                                                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                                                                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-                                                                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
-                                                                $result = curl_exec($ch);
-                                                                $objTareasCurso = json_decode($result);
-
-
-
-                                                                curl_setopt($ch, CURLOPT_URL, 'http://aulavirtual.unfv.edu.pe/web/homework/listbysection?s='.$sectionId);
-                                                                curl_setopt($ch, CURLOPT_HTTPHEADER, $cabecera);
-                                                                curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
-                                                                curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookie.txt');
-                                                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                                                                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-                                                                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                                                                $result = curl_exec($ch);
-                                                                $objNotaTareaCurso = json_decode($result);
+                                                                // curl_setopt($ch, CURLOPT_URL, 'http://aulavirtual.unfv.edu.pe/web/homework/listbysection?s='.$sectionId);
+                                                                // curl_setopt($ch, CURLOPT_HTTPHEADER, $cabecera);
+                                                                // curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
+                                                                // curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookie.txt');
+                                                                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                                                // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                                                                // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                                                                // $result = curl_exec($ch);
+                                                                // $objNotaTareaCurso = json_decode($result);
 
 
                                                                 // echo '<pre>';
                                                                 // print_r($objNotaTareaCurso);
                                                                 // echo '</pre>';
-                                                                ?>
-                                                                <div class="row survey-app">
-                                                                    <div class="col col-12">
-                                                                
-                                                                        <div class="mb-2 pt-4"><h3><?php echo $nombreCurso; ?></h3></div>
-                                                                        
-                                                                        <div class="separator mb-4"></div>
-
-                                                                        <?php
-                                                                        
-                                                                            for ($j = 0; $j < count($objTareasCurso); $j++) { 
-                                                                                ?> 
-
-
-                                                                                <div class="row">
-                                                                                    <div class="col col-12">
-                                                                                        <div class="card d-flex mb-3 active">
-                                                                                            
-                                                                                            <div class="d-flex flex-grow-1 min-width-zero">
-                                                                                                <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center pb-2">
-                                                                                                    <a  class="list-item-heading mb-0 truncate w-40 w-xs-100  mb-1 mt-1"><i class="heading-icon simple-icon-refresh"></i> <span class="align-middle d-inline-block color-theme-1"><?php echo $objTareasCurso[$j]->title; ?></span></a>
-                                                                                                    <p class="mb-1 text-muted text-small w-15 w-xs-100">Fecha de inicio: <br><?php echo $objTareasCurso[$j]->dateBegin; ?></p>
-                                                                                                    <p class="mb-1 text-muted text-small w-15 w-xs-100">Fecha de cierre: <br><?php echo $objTareasCurso[$j]->dateEnd; ?></p>
-
-                                                                                                    <div class="w-15 w-xs-100">                                                                                            
-                                                                                                        <?php 
-                                                                                                        if( $objTareasCurso[$j]->state =="INA") { 
-                                                                                                            echo '<span class="badge badge-light badge-pill">Vencido</span>'; 
-                                                                                                        } else { 
-                                                                                                            echo '<span class="badge badge-primary badge-pill">Pendiente</span>'; 
-
-                                                                                                        }; 
-                                                                                                        ?>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="card-body pt-1">
-                                                                                                <p class="mb-0"><?php echo $objTareasCurso[$j]->content; ?> </p>
-                                                                                                <p><div role="alert" aria-live="polite" aria-atomic="true" class="rounded alert alert-primary">
-                                                                                                <?php
-                                                                                                if(count($objNotaTareaCurso[$j]->homeworkstds) > 0) { ?>                                      
-                                                                                                    Nota: <?php   echo $objNotaTareaCurso[$j]->homeworkstds[0]->score;   
-                                                                                                } else {
-                                                                                                    echo "Nota: ";
-                                                                                                }
-                                                                                                    ?> 
-                                                                                                </div></p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-
-                                                                        <?php   } ?> 
-
-                                                                    </div>
-                                                                </div>
-                                                                <?php 
-
-
-                                                            }
-
-
                                                         ?>
+                                                        <div id="inner-tareas">
+                                                        </div>
+                                                        <div id="loader" class="lds-css ng-scope">
+                                                            <div style="width:100%;height:100%" class="lds-ellipsis"><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>
+                                                        </div>
+
                                                     </div>
+                                               
+                                                    <?php /** 
                                                     <div class="tab-pane fade" id="foros" role="tabpanel" aria-labelledby="foros-tab">
                                                         
                                                             <?php 
@@ -504,7 +445,7 @@ $plataforma = false;
                                                             <?php  }?>
                                                     </div>
                                                 */ ?>
-                                                
+                                                    
                                             </div>
                                     </div>
                                 </div>
@@ -556,44 +497,134 @@ $plataforma = false;
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
                 <script>
-                    console.log(0);
+
 
                 $(document).ready(function(){ 
-                    console.log(1);
 
-                    <?php  if(!empty($_SESSION['logged_in'])) { ?> 
+                    <?php  if(!empty($_SESSION['logged_in'])) { ?>                     
+          
+                        var counter=0;
+                        // $('#tareas').html("cargando ajax");
+                        
 
-                        var cursos = [<?php                           
-                        for ($i=0; $i < count($_SESSION['cursos']); $i++) {                             
-                                echo '["'.$_SESSION['cursos'][$i]->sectionId.'",';
-                                echo '"'.$_SESSION['cursos'][$i]->name.'"] ,';                        
-                            }
-                        ?> ];
 
-                        console.log(cursos);
+                        function recursively_ajax() {
 
-                        for (let index = 0; index < cursos.length; index++) {
-                            // var id = cursos[index][0];
-
-                            // $.get( "http://localhost:8080/cuded/api.php?t=tareas", { sectionId:  id  }, function( data ) {
-                             
-                            //     // alert( "Load was performed." );
-                            // });
-
-                            $.ajax({
-                                method: "POST",
-                                url: "http://localhost:8080/cuded/api.php?t=tareas",
-                                data: {  sectionId:  cursos[index][0] },
-                                success: function(data){
-                                    console.log(cursos[index][0]);
-                                console.log(data);
+                            var pass_data=5;
+                            let $html = '';
+                            
+                            var cursos = [<?php                           
+                            for ($i=0; $i < count($_SESSION['cursos']); $i++) {                             
+                                    echo '["'.$_SESSION['cursos'][$i]->sectionId.'",';
+                                    echo '"'.$_SESSION['cursos'][$i]->name.'"] ,';                        
                                 }
-                            })
+                            ?> ];
+
 
                             
-                        }
+                            $.ajax({
+                                    type:"POST",
+                                    async:false, // set async false to wait for previous response
+                                    url: "http://localhost:8080/cuded/api.php?t=tareas",
+                                    dataType:"json",
+                                    data: {  sectionId:  cursos[counter][0] },
+                                    success: function(data){
+
+                                        $html += '<div class="row survey-app"><div class="col col-12">';
+                                        $html += '<div class="mb-2 pt-4"><h3>'+cursos[counter][1]+'</h3></div>';//name course
+                                        $html += '<div class="separator mb-4"></div>';
+
+
+                                        for (let index = data.length ; 0 < index; index--) {
+                                                const element = data[index-1];
+                                                let state_t;
+
+                                                element.state =="INA" ? state_t = "t_vencido" : state_t = "t_pendiente";
+
+                                                $html += '<div class="row task '+state_t+'"><div class="col col-12"><div class="card d-flex mb-3 active">'
+
+                                                    $html += '<div class="d-flex flex-grow-1 min-width-zero"><div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center pb-2">';
+
+                                                        $html += '<a  class="list-item-heading mb-0 truncate w-40 w-xs-100  mb-1 mt-1"><i class="heading-icon simple-icon-refresh"></i> <span class="align-middle d-inline-block color-theme-1">'+ element.title+'</span></a>';
+                                                        $html += '<p class="mb-1 text-muted text-small w-15 w-xs-100">Fecha de inicio: <br>'+ element.dateBegin+'</p>';
+                                                        $html += '<p class="mb-1 text-muted text-small w-15 w-xs-100">Fecha de cierre: <br>'+ element.dateEnd+'</p>';
+
+
+                                                            $html += '<div class="w-15 w-xs-100">';
+                                                                
+                                                                if(element.state =="INA"){
+                                                                    $html += '<span class="badge badge-light badge-pill">Vencido</span>';
+
+                                                                } else {
+                                                                    $html += '<span class="badge badge-primary badge-pill">Pendiente</span>';
+                                                                }
+                                                            
+
+                                                            $html += '</div>';
+
+                                                    $html += '</div></div>';
+
+                                                    $html += '<div class="card-body pt-1">';
+            
+                                                        $html += '<p class="mb-0">'+ element.content+'</p>';
+
+                                                        $html += '<p><div role="alert" aria-live="polite" aria-atomic="true" class="rounded alert alert-primary">';
+                                                            
+                                                
+                                                        
+                                                        <?php /*
+                                                        if(count($objNotaTareaCurso[$j]->homeworkstds) > 0) { ?>                                      
+                                                            Nota: <?php   echo $objNotaTareaCurso[$j]->homeworkstds[0]->score;   
+                                                        } else {
+                                                            echo "Nota: ";
+                                                        }
+                                                            */?>
+                                                            
+                                                        $html += '</div></p>';                                                   
+                                                
+
+                                                    $html += '</div>';
+
+
+                                                $html += '</div></div></div>';
+
+                                                
+                                            };
+
+                                        
+                                        $html += '</div></div>';
+
+                                        $('#inner-tareas').append($html); 
+                                                                    
+                                                                                                       
+                                                                        
+                                                                        
+                                                                        
+
+                                        
+
+
+                                        console.log(cursos[counter][1]);
+                                        console.log(data);
+                                        counter++;
+                                        if(counter < cursos.length){
+                                            recursively_ajax();
+                                        } else {
+                                            $('#loader').remove();
+                                        }
+                                    }
+                                });
+
+                            
+
+                        }   
+
+                        recursively_ajax();    
                         
-          
+
+
+
+
                     
                     <?php } ?> 
 
