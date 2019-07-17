@@ -238,15 +238,15 @@ $plataforma = false;
                                                     <div class="tab-pane fade show active" id="tareas" role="tabpanel" aria-labelledby="tareas-tab">                                   <ul class="list-unstyled my-4">
                                                                 <div role="radiogroup" tabindex="-1" class="pt-2 d-flex justify-content-around" id="items_tareas">
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Flexbox" id="tareas_todos" name="tareas_todos">
+                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Flexbox" id="tareas_todos" name="tareas_radio">
                                                                         <label class="custom-control-label" for="tareas_todos"><span>Todos</span></label>
                                                                     </div>
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Sass" id="tareas_pendientes" name="tareas_pendientes">
+                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Sass" id="tareas_pendientes" name="tareas_radio">
                                                                         <label class="custom-control-label" for="tareas_pendientes"><span>Pendientes</span></label>
                                                                     </div>
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Vue" id="tareas_vencidos" name="tareas_vencidos">
+                                                                        <input type="radio" autocomplete="off" class="custom-control-input" value="Vue" id="tareas_vencidos" name="tareas_radio">
                                                                         <label class="custom-control-label" for="tareas_vencidos"><span>Vencidos</span></label>
                                                                     </div>                                                     
                                                                 </div>
@@ -277,10 +277,10 @@ $plataforma = false;
 
                                                     </div>
                                                
-                                                    <?php /** 
+                                                     
                                                     <div class="tab-pane fade" id="foros" role="tabpanel" aria-labelledby="foros-tab">
-                                                        
-                                                            <?php 
+                                                         
+                                                            <?php /**
                                                             
                                                             for ($n = 0; $n <= count($objCursos); $n++) {
 
@@ -368,12 +368,12 @@ $plataforma = false;
                                                                     </div>
                                                                 </div>
                                                                 <?php 
-                                                                }
-                                                            ?>
+                                                                } */ ?>
                                                     </div>
                                                     <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
                                                         
                                                                 <?php
+                                                                /**
 
                                                                     for ($j = 0; $j <= count($objCursos); $j++) {
                                                                         $sectionId = $objCursos[$j]->sectionId;
@@ -442,9 +442,10 @@ $plataforma = false;
                     
                                                                             </div>
                                                                         </div>
-                                                            <?php  }?>
+                                                            <?php  } */ ?>
+                                                             
                                                     </div>
-                                                */ ?>
+                                               
                                                     
                                             </div>
                                     </div>
